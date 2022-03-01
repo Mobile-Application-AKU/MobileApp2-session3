@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- button to login (calls 'loginUser()' function from 'src/app/login/login.page.ts') -->
+  <ion-button (click)="loginUser()" expand="block">
+    Login
+  </ion-button>
+
+  <!-- button to redirect to home -->
+  <ion-button [routerLink]="['/home']" expand="block">
+    Home
+  </ion-button>
+</ion-content>
