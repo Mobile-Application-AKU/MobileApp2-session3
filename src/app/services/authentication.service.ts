@@ -40,24 +40,41 @@ export class AuthenticationService {
     });
   }
 
-  // creating a function to login the user.
-  login() {
-    // we made it static so we need to declare the variable that contains the userAKU_info we want as our login.
+  /* START OF CODE CHANGES FROM SESSION 4 */
+  // creating an async function to login the user that takes 2 variables(username & password) of type string.
+  async login(username: string, password: string) {
+    // we made it dynamic so we need to declare the variables that reads the value from the contact form.
     var params = {
       // we set the userAKU_info to the following.
-      // username: 0000.
-      username: '0000',
-      // password: 0000.
-      password: '0000'
+      // username: the username value read from the form.
+      username: username,
+      // password: the password value read from the form.
+      password: password
     }
-    
-    // we add the storage.set() function to the login function to set the userAKU_info to the database.
-    this.storage.set('useAKU_info', params).then((resp)=>{
-      // we set the authState to true, this will activate the route to the dashboard page.
-      this.authState.next(true);
-      // we navigate to the dashboard page using the 'router.navigate()' function.
-      this.router.navigate(['/dashboard']);
-    });
+
+    // then we need to check if the username & password are correct(in our case we will check if they are equal to 'admin').
+    if (params.username == "admin" && params.password == "admin") {
+      // we add the storage.set() function to the login function to set the userAKU_info to the database.
+      this.storage.set('useAKU_info', params).then((resp)=>{
+        // we set the authState to true, this will activate the route to the dashboard page.
+        this.authState.next(true);
+        // we navigate to the dashboard page using the 'router.navigate()' function.
+        this.router.navigate(['/dashboard']);
+      });
+    }
+    // and if the values are incorrect we send a toast message to say that they are wrong.
+    else {
+      // we keep the authstate = false.
+      this.authState.next(false);
+      // creating a toast message of duration 1000ms and showing the message 'Please login first.'.
+      const toast = await this.toastController.create({
+        message: "Username or password are incorrect",
+        duration: 1000
+      });
+      // showing the toast message.
+      await toast.present();
+    }
+    /* END OF CODE CHANGES FROM SESSION 4 */
   }
   
   // creating a function to logout the user.

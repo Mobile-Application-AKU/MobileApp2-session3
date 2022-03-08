@@ -5,10 +5,20 @@
 </ion-header>
 
 <ion-content>
-  <!-- button to login (calls 'loginUser()' function from 'src/app/login/login.page.ts') -->
-  <ion-button (click)="loginUser()" expand="block">
-    Login
-  </ion-button>
+  <!-- START OF CODE CHANGES FROM SESSION 4 -->
+  <!-- creating a form with a call for the function 'loginUser()' on submit -->
+  <form (submit)="loginUser()">
+    <!-- username input -->
+    <ion-input [(ngModel)]="login.username" name="username" placeholder="username"></ion-input>
+    <!-- password input -->
+    <ion-input [(ngModel)]="login.password" name="password" placeholder="password" type="password"></ion-input>
+    <!-- login button -->
+    <ion-button expand="full" (click)="loginUser()">Login</ion-button>
+  </form>
+  <!-- END OF CODE CHANGES FROM SESSION 4 -->
+
+
+  
 
   <!-- button to redirect to home -->
   <ion-button [routerLink]="['/home']" expand="block">
